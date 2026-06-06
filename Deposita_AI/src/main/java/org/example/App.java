@@ -1,33 +1,34 @@
 package org.example;
 
 import io.github.ollama4j.Ollama;
-import io.github.ollama4j.exceptions.OllamaException;
-import io.github.ollama4j.models.chat.OllamaChatMessageRole;
-import io.github.ollama4j.models.chat.OllamaChatRequest;
-import io.github.ollama4j.models.chat.OllamaChatResult;
+import java.util.Scanner;
 
 public class App {
-
-  public static void main(String[] args) throws OllamaException {
+  public static void main(String[] args) throws Exception {
 
     Ollama ollama = new Ollama("http://localhost:11434/");
-
     ollama.setRequestTimeoutSeconds(300);
 
-    String model = "qwen2.5-coder:7b";
+    Long contaId = 1L;
 
-    String pergunta = "O que é Java?";
+    ContaDAO contaDAO         = new ContaDAO();
+    TransacaoDAO transacaoDAO = new TransacaoDAO();
+    BancoServico servico      = new BancoServico(contaDAO, transacaoDAO);
+    AgenteIA agente           = new AgenteIA(ollama, servico);
 
-    OllamaChatRequest request = OllamaChatRequest.builder()
-            .withModel(model)
-            .withMessage(OllamaChatMessageRole.USER, pergunta)
-            .build();
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("🏦 Bem-vindo ao Deposita AI! Como posso ajudar?");
+    System.out.println("(Digite 'sair' para encerrar)\n");
 
-    OllamaChatResult result = ollama.chat(request, null);
+    while (true) {
+      System.out.print("Você: ");
+      String entrada = scanner.nextLine().trim();
+      if (entrada.equalsIgnoreCase("sair")) break;
 
-    System.out.println(pergunta);
+      String resposta = agente.processar(contaId, entrada);
+      System.out.println("Agente: " + resposta + "\n");
+    }
 
-    System.out.println(result.getResponseModel().getMessage().getResponse());
-
+    System.out.println("Até logo!");
   }
 }
