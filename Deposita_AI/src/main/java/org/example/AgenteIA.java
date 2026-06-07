@@ -30,6 +30,7 @@ public class AgenteIA {
         - "depositar 150 reais" → {"intencao":"DEPOSITO","valor":150.0,"destino_conta_id":null,"mensagem":"Realizando depósito de R$ 150,00..."}
         - "pix 200 para conta 3" → {"intencao":"PIX","valor":200.0,"destino_conta_id":3,"mensagem":"Realizando Pix..."}
         - "ver extrato" → {"intencao":"EXTRATO","valor":0,"destino_conta_id":null,"mensagem":"Buscando seu extrato..."}
+        - "criar conta" → {"intencao":"NOVA_CONTA","valor":0,"destino_conta_id":null,"mensagem":"Criando nova conta..."}
         """;
 
     public AgenteIA(Ollama ollama, BancoServico servico) {
@@ -75,4 +76,5 @@ public class AgenteIA {
             default         -> "Não entendi. Tente: saldo, depositar, pix ou extrato.";
         };
     }
+
 }
