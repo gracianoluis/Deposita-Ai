@@ -9,8 +9,6 @@ public class App {
     Ollama ollama = new Ollama("http://localhost:11434/");
     ollama.setRequestTimeoutSeconds(300);
 
-    Long contaId = 1L;
-
     ContaDAO contaDAO         = new ContaDAO();
     TransacaoDAO transacaoDAO = new TransacaoDAO();
     BancoServico servico      = new BancoServico(contaDAO, transacaoDAO);
@@ -18,6 +16,8 @@ public class App {
 
     Scanner scanner = new Scanner(System.in);
     System.out.println("🏦 Bem-vindo ao Deposita AI! Como posso ajudar?");
+    System.out.println("Exemplos: 'criar conta', 'depositar 100 na conta 1',");
+    System.out.println("          'pix 50 da conta 1 para conta 2', 'saldo da conta 1'");
     System.out.println("(Digite 'sair' para encerrar)\n");
 
     while (true) {
@@ -25,7 +25,7 @@ public class App {
       String entrada = scanner.nextLine().trim();
       if (entrada.equalsIgnoreCase("sair")) break;
 
-      String resposta = agente.processar(contaId, entrada);
+      String resposta = agente.processar(entrada);
       System.out.println("Agente: " + resposta + "\n");
     }
 
