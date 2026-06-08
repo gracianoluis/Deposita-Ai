@@ -32,3 +32,13 @@ O objetivo principal do projeto é unir conceitos de **Java**, **banco de dados*
 
 Este projeto tem como objetivo praticar a criação de uma aplicação bancária simples com persistência em banco de dados e integração com um agente de Inteligência Artificial.  
 A ideia é que o usuário consiga solicitar ações como “consultar meu saldo”, “depositar dinheiro” ou “fazer um Pix”, e o sistema interprete essas intenções para executar a operação correspondente.
+
+## Equipe
+
+- Abraão Prado
+- Isabelle Cristine
+- João Fonseca
+- Lucas Monteiro
+- Luis Gustavo
+- Melina Ito
+- Ramon Nascimento
